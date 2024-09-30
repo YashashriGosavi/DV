@@ -1,0 +1,86 @@
+#Aim: Perform Reshaping of the hierarchical data and pivoting data frame data.
+
+import pandas as pd
+import numpy as np
+data=pd.read_csv("NYC_Jobs.csv")
+data.head()
+
+df = pd.DataFrame({'foo': ['one', 'one', 'one', 'two', 'two',
+                           'two'],
+                   'bar': ['A', 'B', 'C', 'A', 'B', 'C'],
+                   'baz': [1, 2, 3, 4, 5, 6],
+                   'zoo': ['x', 'y', 'z', 'q', 'w', 't']})
+df
+
+df.pivot(index='foo', columns='bar', values='baz')
+
+df.pivot_table(values="baz", index=["foo", "bar"], columns=["zoo"])
+
+data.pivot_table(values='Salary Range From', index='Job ID', columns="Agency")
+
+data_pivoted = data.pivot_table(values='Salary Range From', index='Job ID', columns='Agency')
+print(data_pivoted)
+
+data_pivoted
+
+pd.pivot_table(df, values="baz", index=["foo", "bar"], columns=["zoo"])
+
+tuples = list(
+    zip(
+        *[
+            ["bar", "bar", "baz", "baz", "foo", "foo", "qux", "qux"],
+            ["one", "two", "one", "two", "one", "two", "one", "two"],
+        ]
+    )
+)
+index = pd.MultiIndex.from_tuples(tuples, names=["first", "second"])
+df = pd.DataFrame(np.random.randn(8, 2), index=index, columns=["A", "B"])
+df2 = df[:4]
+df2
+
+a = pd.DataFrame(df.stack())
+a
+
+a.unstack(0)
+a.unstack('second')
+
+melted_data = pd.melt(data, id_vars='Job ID', value_vars=['Agency', 'Posting Type'])
+melted_data
+
+melted_data[melted_data['Job ID']==510670]
+
+data[['Agency', 'Salary Range From']].groupby('Agency').mean()
+
+#
+import pandas as pd
+import seaborn as sns
+Load the Titanic dataset
+titanic = sns.load_dataset('titanic')
+print(titanic.head())
+
+#Step 2: Grouping and Aggregation
+grouped = titanic.groupby(['class', 'sex']).agg({'age': 'mean', 'survived': 'mean'})
+print(grouped)
+
+stacked = grouped.stack()
+print(stacked)
+
+reshaped = grouped.unstack()
+print(reshaped)
+
+pivot_table = titanic.pivot_table(values='fare', index='class', columns='sex', aggfunc='mean')
+print(pivot_table)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Visualizing the pivoted data with a heatmap
+sns.heatmap(pivot_table, annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Average Fare by Class and Sex')
+plt.show()
+
+melted = pd.melt(titanic, id_vars=['class', 'sex'], value_vars=['age', 'fare', 'survived'],
+                 var_name='Measurement', value_name='Value')
+
+# Display the melted DataFrame
+print(melted.head())
