@@ -1,0 +1,104 @@
+#Create two-dimensional data with the help of data frames and perform different operations
+!pip install pandas matplotlib
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Create an initial DataFrame
+data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Age': [24, 27, 22, 32, 29],
+    'Salary': [50000, 54000, 58000, 62000, 66000],
+    'Department': ['HR', 'IT', 'Finance', 'IT', 'HR']
+}
+
+df = pd.DataFrame(data)
+print("Initial DataFrame:")
+print(df)
+
+# Add a new column 'Bonus'
+df['Bonus'] = df['Salary'] * 0.10
+print("\nDataFrame after adding 'Bonus' column:")
+print(df)
+
+# Delete the 'Department' column
+df = df.drop('Department', axis=1)
+print("\nDataFrame after deleting 'Department' column:")
+
+
+# Select rows where Age > 25
+selected_rows = df[df['Age'] > 25]
+print("\nRows where Age > 25:")
+print(selected_rows)
+
+# Modify the 'Salary' column by giving a 5% raise
+df['Salary'] = df['Salary'] * 1.05
+print("\nDataFrame after giving a 5% raise:")
+print(df)
+
+# Same increase the bonus
+
+
+#Incrase age of all employee by 1
+df['Age']=df['Age'] + 1
+print(df)
+
+#Rename Column name
+df = df.rename(columns={'Salary' : 'Annual salary'})
+print(df)
+
+
+# Introduce missing data
+df.loc[1, 'Bonus'] = np.nan
+df.loc[3, 'Bonus'] = np.nan
+print("\nDataFrame with missing data:")
+print(df)
+
+#How to identify null or missing value
+print (df.isnull())
+
+#Drop rows with any missing values hint use -> dropna()
+print(df.dropna())
+
+# Fill missing values with the mean of the 'Bonus' column
+df['Bonus'] = df['Bonus'].fillna(df['Bonus'].mean())
+print("\nDataFrame after filling missing 'Bonus' values with the mean:")
+print(df)
+
+# Descriptive statistics
+print("\nDescriptive statistics:")
+print(df.describe()) #Works for numeric values 
+print(df.describe(include='all')) #works for all column
+
+
+#(n+1)*0.25 =>
+# Sum of salaries
+print("\nSum of all salaries:", df['Annual salary'].sum())
+
+# Mean age
+print("Mean age:", df['Age'].mean())
+
+
+# Create another DataFrame to merge
+new_data = {
+    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'Years at Company': [1, 2, 1, 3, 4]
+}
+new_df = pd.DataFrame(new_data)
+print(new_df)
+
+# Merge DataFrames on 'Name'
+merged_df = pd.merge(df, new_df, on='Name')
+#print("\nMerged DataFrame:")
+print(merged_df)
+
+
+# Plotting the Age vs. Salary
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Age'], df['Annual salary'], color='blue')
+plt.title('Age vs. Annual salary')
+plt.xlabel('Age')
+plt.ylabel('Annual salary')
+plt.grid(True)
+plt.show()
