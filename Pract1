@@ -1,0 +1,86 @@
+# Aim: Create one-dimensional data using series and perform various operations on it. 
+!pip install pandas
+
+import pandas as pd
+
+#normal series with no custom index
+data = [10,20,30,40,50,60,70]
+series = pd.Series(data)
+print(series)
+
+#using describe method
+print(series.describe())
+
+#normal series with custom index
+index_label = ['a','b','c','d','e','f','g']
+series_custom_index = pd.Series(data, index_label)
+print(series_custom_index)
+
+#to print according to the inbuild index no.
+print(series_custom_index[3])
+
+#to print according to the custom index labels.
+print(series_custom_index['d'])
+
+#Creating a series using dictionary
+data_dict = {'n1':100,'n2':200,'n3':300,'n4':400,'n5':500}
+print(data_dict)
+series_dict = pd.Series(data_dict)
+print(series_dict)
+
+print(series_dict[3])
+
+#using scalar values
+scalar_value = 100
+index_labels = ['a','b','c','d','e','f']
+series_scalar = pd.Series(scalar_value, index_labels)
+print(series_scalar)
+
+#alternate way
+newseries = pd.Series(75.5,['abc','def','lmn', 'pqr', 'xyz'])
+print(newseries)
+
+#
+seriesExample = pd.Series([300,150,250,450,758,956],index = ['d1','d2','d3','d4','d5','d6'])
+print(seriesExample)
+
+#using loc/location method
+print('using loc method')
+print(seriesExample.loc['d2':'d5'])
+
+#using iloc/integer-location method
+print('using iloc method')
+print(seriesExample.iloc[1:5])
+
+#to understand operations (like addition,subtraction,...) on series
+
+series1 = pd.Series([10,20,30,40,50,60])
+print('\nSeries1\n',series1)
+series2 = pd.Series([10,20,30,40,50,70])
+print('\nSeries2\n',series2)
+
+print('\n Addition of both series is\n', series1+series2)
+print('\nAddition of a no in series\n',series1.add(5))
+
+print('\n Subtraction of both series is\n', series1-series2)
+print('\nSubtraction of a no in series\n',series1.sub(5))
+
+#find out mean of the series
+series1 = pd.Series([10,20,30,40,50,None,70,40,50,70,10], name = 'Series Count' )
+print('Mean of the series is', series1.mean())
+print('Sum of the series is', series1.sum())
+print('min of the series is', series1.min())
+print('max of the series is', series1.max())
+print('Filter elements that are > than 20\n', series1>20)
+print('Filter elements that are > than 20\n', series1[series1>20])
+
+series2 = series1.astype(float)
+print('\nSeries with float values\n',series2)
+
+print('\nfill none values\n',series1.fillna(0))
+
+print('\nUnique values in the series\n', series.unique())
+print('\nUnique values in the series\n', series.nunique())
+
+s1=series1.astype(float)
+print('int to float',s1)
