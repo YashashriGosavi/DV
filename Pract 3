@@ -1,0 +1,144 @@
+#Write a code to read data from the different file formats like JSON, HTML, XML, and 
+#CSV files and check for missing data and outlier values and handle them. 
+
+!pip install pandas numpy matplotlib lxml
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from lxml import etree
+
+import pandas as pd
+
+#Read csv data
+df=pd.read_csv('data.csv')
+print("CSV data shape:", df.shape)
+print("\n", df.head)
+
+# Part 1: Reading data from different formats
+
+def read_csv(file_path):
+    print("Reading CSV file...")
+    df = pd.read_csv(file_path)
+    print("CSV data shape:", df.shape)
+    return df
+
+def read_json(file_path):
+    print("Reading JSON file...")
+    df = pd.read_json(file_path)
+    print("JSON data shape:", df.shape)
+    return df
+
+def read_xml(file_path):
+    print("Reading XML file...")
+    tree = etree.parse(file_path)
+    root = tree.getroot()
+    data = []
+    for elem in root:
+        data.append({child.tag: child.text for child in elem})
+    df = pd.DataFrame(data)
+    print("XML data shape:", df.shape)
+    return df
+
+def read_html(url):
+    print("Reading HTML table...")
+    tables = pd.read_html(url)
+    df = tables[0]  # Assuming we want the first table
+    print("HTML data shape:", df.shape)
+    return df
+
+# Part 2: Checking for missing values and outliers
+
+def check_missing_values(df):
+    print("\nChecking for missing values:")
+    missing = df.isnull().sum()
+    if missing.sum() > 0:
+        print(missing[missing > 0])
+    else:
+        print("No missing values found.")
+
+    # Visualize missing values
+    plt.figure(figsize=(10, 6))
+    plt.bar(missing.index, missing.values)
+    plt.title('Missing Values by Column')
+    plt.xlabel('Columns')
+    plt.ylabel('Number of Missing Values')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+def check_outliers(df):
+    print("\nChecking for outliers in numeric columns:")
+    numeric_columns = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_columns:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        outliers = df[(df[col] < lower_bound) | (df[col] > upper_bound)]
+        if not outliers.empty:
+            print(f"Outliers in {col}:")
+            print(outliers[[col]])
+
+        # Visualize outliers with box plot
+        plt.figure(figsize=(10, 6))
+        df[col].plot(kind='box')
+        plt.title(f'Box Plot of {col}')
+        plt.show()
+
+# Part 3: Handling missing values and outliers
+
+def handle_missing_values(df):
+    print("\nHandling missing values:")
+    # Fill numeric columns with median
+    numeric_columns = df.select_dtypes(include=[np.number]).columns
+    df[numeric_columns] = df[numeric_columns].fillna(df[numeric_columns].median())
+
+    # Fill categorical columns with mode
+    categorical_columns = df.select_dtypes(include=['object']).columns
+    df[categorical_columns] = df[categorical_columns].fillna(df[categorical_columns].mode().iloc[0])
+
+    print("Missing values have been handled.")
+    return df
+
+def handle_outliers(df):
+    print("\nHandling outliers:")
+    numeric_columns = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_columns:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        lower_bound = Q1 - 1.5 * IQR
+        upper_bound = Q3 + 1.5 * IQR
+        df[col] = np.clip(df[col], lower_bound, upper_bound)
+
+    print("Outliers have been handled.")
+    return df
+
+# Main execution
+if __name__ == "__main__":
+    # Reading data from different formats
+    csv_df = read_csv('data.csv')
+    json_df = read_json('data.json')
+    xml_df = read_xml('data.xml')
+    html_df = read_html('https://en.wikipedia.org/wiki/List_of_countries_by_GDP_(nominal)')
+
+    # Choose one dataframe to process (e.g., csv_df)
+    df = csv_df
+
+    # Check for missing values and outliers
+    check_missing_values(df)
+    check_outliers(df)
+
+    # Handle missing values and outliers
+    df = handle_missing_values(df)
+    df = handle_outliers(df)
+
+    # Verify the changes
+    print("\nAfter handling missing values and outliers:")
+    check_missing_values(df)
+    check_outliers(df)
+
+    print("\nProcessed data:")
+    print(df.head())
