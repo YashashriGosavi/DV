@@ -1,0 +1,82 @@
+Performing Calculation and creating parameters in Tableau. 
+1. Row-Level Calculations 
+
+1: To find Profit Ratio 
+[Profit] / [Sales] 
+Year col /ratio  row/ category Color
+
+2: To calculate the Discount Amount
+ [Sales] * [Discount]
+Sub catego col/ DA row
+
+3: To calculate Days to Ship 
+DATEDIFF('day', [Order Date], [Ship Date])
+"Ship Mode" to Rows / "Days to Ship" to Columns/category Color
+
+4: To calculate Price per Unit 
+ [Sales] / [Quantity]
+"Sub-Category" to Rows/ "Sub-Category" to Rows/  "Category" to Color
+
+2. Aggregate Calculations 
+1: Calculate Total Sales and Maximum Discount Given by Region
+MAX ( [Discount] )
+SUM ( [Sales] )|
+Col measure names/row region/ text mark measure values max Sum
+
+2: Calculate Average Profit by Category
+AVG ( [Profit] )
+col category/ row Average pro/ region color
+
+Show the total number of orders per category:  
+COUNT([Order ID]) 
+Col filed cal/ row category
+
+3. Level of Detail (LOD) Expressions 
+A. Fixed LOD:
+Show total sales by category while showing products 
+{ FIXED [Category]:SUM([Sales])}
+col measure names/ sub cat cat row/ measure values in Text select Sales and Calcu Filed
+
+B. Include LOD: 
+Show average sales of customer per country and category 
+AVG({ INCLUDE [Category]: AVG([Sales])})
+
+Exclude
+{ EXCLUDE [Category],[Sub-Category]:SUM([Sales])}
+country and category rows/ Col measure names / Measure values Text mark add the calculated filed
+
+
+4. Table Calculations
+order date (year) in the rows
+sales in the columns right-click on sales and click on ‘Add Table Calculation,
+
+sales in the rows 
+Category  in the columns  right-click on sales and click on ‘Add Table Calculation,
+
+Part B: Working with Parameters  
+1)
+ IF SUM([Profit]) < [p. Choose Profit values] THEN 'Red'  
+ELSE 'Green'  
+END 
+parameter named ‘p. Choose Profit values.' integer 10000 
+col profit/ row sub-cat/ color marks calculated Filed
+
+2)
+p. Choose Dimension crete para
+Dynamic Dimension cla fiels
+CASE [p. Choose Dimension]  
+WHEN 'Country' THEN [Country/Region]  
+WHEN 'Category' THEN [Category]  
+WHEN ‘Subcategory' THEN [Sub-Category]  
+END 
+
+right-click → Edit title and inset the parameter 
+show paraamete
+col sales/ row Dynamic Dimension
+
+3)
+CASE [p. Choose Measure]  
+WHEN ‘Profit' THEN [Profit]  
+WHEN ‘Quantity' THEN [Quantity]  
+WHEN ‘Discount' THEN [Discount]  
+END 
