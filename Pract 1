@@ -3,23 +3,18 @@
 
 import pandas as pd
 
-#normal series with no custom index
 data = [10,20,30,40,50,60,70]
 series = pd.Series(data)
 print(series)
 
-#using describe method
 print(series.describe())
 
-#normal series with custom index
 index_label = ['a','b','c','d','e','f','g']
 series_custom_index = pd.Series(data, index_label)
 print(series_custom_index)
 
-#to print according to the inbuild index no.
 print(series_custom_index[3])
 
-#to print according to the custom index labels.
 print(series_custom_index['d'])
 
 #Creating a series using dictionary
@@ -53,7 +48,6 @@ print('using iloc method')
 print(seriesExample.iloc[1:5])
 
 #to understand operations (like addition,subtraction,...) on series
-
 series1 = pd.Series([10,20,30,40,50,60])
 print('\nSeries1\n',series1)
 series2 = pd.Series([10,20,30,40,50,70])
