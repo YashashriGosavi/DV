@@ -22,3 +22,5 @@ SUM([Sales]) >= WINDOW_AVG(SUM([Sales]))
 Sales to the columns
 subcategory to the row
 Add Filed in Color 
+
+Create a Dashboard add all sheet in one 
