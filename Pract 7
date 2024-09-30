@@ -1,0 +1,24 @@
+Aim: Designing Tableau Dashboards for different displays and devices. 
+
+Worksheet 1 KPIs
+Customer ID into rows → down arrow → Measures →Count (Distinct).
+Measures Name in Col (OPTinal)
+Measure values Text Mark add SUM PROFIT Customer ID
+
+Worksheet 2
+‘Sales by Country’ → Double-click on the 'Country/Region', a map 
+ Sales in the Color section in Marks.
+Country/Regionin Text Mark
+
+Worksheet 3
+vworksheet and name it ‘Sales by Month.
+ order date into the columns  Month option
+ row section, add Sales → 2 Times
+Dual Axis’, ‘Synchronize axis
+
+Work 4
+Sales by Products
+SUM([Sales]) >= WINDOW_AVG(SUM([Sales]))
+Sales to the columns
+subcategory to the row
+Add Filed in Color 
