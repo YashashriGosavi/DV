@@ -1,0 +1,96 @@
+CSV file (data.csv): 
+To create this file: 
+ 
+ 
+1. Open a text editor (like Notepad or TextEdit) 
+2. Add following data: 
+                  ID,Name,Age,City,Salary 
+                  1,John Doe,30,New York,75000 
+                  2,Jane Smith,28,Los Angeles,82000 
+                  3,Mike Johnson,35,Chicago,68000 
+                  4,Emily Brown,32,Houston,79000 
+                  5,David Lee,,San Francisco,88000 
+ 
+3. Save the file as "data.csv". 
+ 
+ 
+JSON file (data.json): 
+ 
+[ 
+  { 
+    "ID": 1, 
+    "Name": "John Doe", 
+    "Age": 30, 
+    "City": "New York", 
+    "Salary": 75000 
+  }, 
+  { 
+    "ID": 2, 
+    "Name": "Jane Smith", 
+    "Age": 28, 
+    "City": "Los Angeles", 
+    "Salary": 82000 
+  }, 
+  { 
+    "ID": 3, 
+    "Name": "Mike Johnson", 
+    "Age": 35, 
+    "City": "Chicago", 
+    "Salary": 68000 
+  }, 
+  { 
+    "ID": 4, 
+    "Name": "Emily Brown", 
+    "Age": 32, 
+    "City": "Houston", 
+    "Salary": 79000 
+  }, 
+ { 
+    "ID": 5, 
+    "Name": "David Lee", 
+    "Age": null, 
+    "City": "San Francisco", 
+    "Salary": 88000 
+  } 
+] 
+ 
+ 
+XML file (data.xml): 
+<?xml version="1.0" encoding="UTF-8"?> 
+<employees> 
+  <employee> 
+    <ID>1</ID> 
+    <Name>John Doe</Name> 
+    <Age>30</Age> 
+    <City>New York</City> 
+    <Salary>75000</Salary> 
+  </employee> 
+  <employee> 
+    <ID>2</ID> 
+    <Name>Jane Smith</Name> 
+    <Age>28</Age> 
+    <City>Los Angeles</City> 
+    <Salary>82000</Salary> 
+  </employee> 
+  <employee> 
+    <ID>3</ID> 
+    <Name>Mike Johnson</Name> 
+    <Age>35</Age> 
+    <City>Chicago</City> 
+    <Salary>68000</Salary> 
+  </employee> 
+  <employee> 
+    <ID>4</ID> 
+    <Name>Emily Brown</Name> 
+    <Age>32</Age> 
+    <City>Houston</City> 
+    <Salary>79000</Salary> 
+  </employee> 
+  <employee> 
+    <ID>5</ID> 
+    <Name>David Lee</Name> 
+    <Age></Age> 
+    <City>San Francisco</City> 
+    <Salary>88000</Salary> 
+  </employee> 
+</employees> 
