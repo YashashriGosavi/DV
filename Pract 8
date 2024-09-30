@@ -1,0 +1,38 @@
+#Aim: Create Dashboard and Storytelling using tableau. 
+Worksheet 1: Sales and Profit by Region 
+Sales to the Rows
+Region to the Columns
+Profit to the Color shelf under Marks.
+Sales to the label shelf under Marks
+
+Worksheet 2: Sales and Profit over Time 
+"Order Date" to the Columns shelf (default: Month). 
+Sales" to the Rows shelf (line chart appears)
+"Profit" to the Rows shelf (two lines now: Sales and Profit). 
+Dual-Axis: Right-click Profit axis → Dual-Axis → Right-click again → Synchronize Axis.
+Change Colors: On the Marks card, change "SUM(Sales)" and "SUM(Profit)" colors for 
+clarity.
+
+Worksheet 3: Top Products and categories by sales
+"Product Name" to the Rows
+ "Sales" to the Columns
+ right click on Sales in the Rows shelf → Sort → Sort by Descending. 
+Product Name in the Rows shelf → Select Filter. 
+Filter dialog box, go to the Top tab → Select By field: Top 10 by Sum of Sales. 
+ Filter add a Product Name
+
+Cateogry mark color
+sales = -size
+pofit = lebal
+
+Worksheet 4: Sales by Country
+"Country" to the Rows--- -Longit
+"Sales" to the Columns -- latitude
+
+Country/R and sales = text
+sale = -color
+Country/R = Details
+
+Step 3: Build the Dashboard.
+Step 4: Create a Story in Tableau.
+Step 5: Publish the Dashboard and Story
